@@ -32,11 +32,11 @@ func UpdateBook(w http.ResponseWriter,r *http.Request){
 
 
 	collection := db.Client()
-	filter := bson.D{{Key: "Id",Value: id}}
+	filter := bson.D{{Key: "id",Value: id}}
 	update := bson.D{
-		{Key: "$Name",Value: updatedBook.Name},
-		{Key: "$Address",Value: updatedBook.Address},
-		{Key: "$Desc",Value: updatedBook.Desc},
+		{Key: "$set",Value: bson.D{{Key: "Name",Value: updatedBook.Name}}},
+		{Key: "$set",Value: bson.D{{Key: "Address",Value: updatedBook.Address}}},
+		{Key: "$set",Value: bson.D{{Key: "Desc",Value: updatedBook.Desc}}},
 	}
 	updateResult,err := collection.UpdateOne(context.TODO(),filter,update)
 	if err!=nil{
@@ -45,19 +45,4 @@ func UpdateBook(w http.ResponseWriter,r *http.Request){
 		w.Header().Add("Content-type","application/json")
 		json.NewEncoder(w).Encode(updateResult)
 	}
-	// for index,book := range mocks.Books{
-	// 	if book.Id == id {
-	// 		book.Title = updatedBook.Title
-	// 		book.Author = updatedBook.Author
-	// 		book.Desc = updatedBook.Desc
-	// 		book.Id = id
-	// 		mocks.Books[index] = book
-	// 		w.WriteHeader(http.StatusOK)
-	// 		w.Header().Add("Content-Type","applicaiton/json")
-	// 		json.NewEncoder(w).Encode("updated")
-	// 		json.NewEncoder(w).Encode(mocks.Books)
-	// 		json.NewEncoder(w).Encode(updatedBook)
-	// 		break
-	// 	}
-	// }
 }

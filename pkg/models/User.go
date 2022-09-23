@@ -1,9 +1,15 @@
 package models
+
+import (
+	"time"
+)
+
+
 type User struct {
-	Id     int    `json:"id"`
-	Name  string `json:"name"`
-	// DOB primitive.DateTime `bson:"dob,omitempty" json:"dob,omitempty"`
-	Address string `json:address`
-	Desc   string `json:"desc"`
-	// createdAt primitive.DateTime `bson:"createdAt,omitempty" json:"createdAt,omitempty"`
+	Id        int    `json:"id" bson:"id"`
+	Name      string `json:"name" bson:"name"`
+	DOB       string `json:"dob" bson:"dob"`
+	Address   string `json:"address" bson:"address"`
+	Desc      string `json:"desc" bson:"desc"`
+	CreatedAt time.Time `json:"createdAt omitempty" bson:"createdAt omitempty"`
 }

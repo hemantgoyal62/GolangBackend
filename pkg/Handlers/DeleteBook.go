@@ -16,7 +16,7 @@ func Deletebook(w http.ResponseWriter,r *http.Request) {
 	vars:= mux.Vars(r)
 	id,_:=strconv.Atoi(vars["id"])
 	collection := db.Client()
-	deleteResult,err:= collection.DeleteOne(context.TODO(),bson.D{{"id",id}})
+	deleteResult,err:= collection.DeleteOne(context.TODO(),bson.D{{Key: "id",Value: id}})
 	if err!= nil{
 		log.Print(err)
 	}else{

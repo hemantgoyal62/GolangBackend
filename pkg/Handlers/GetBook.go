@@ -21,8 +21,7 @@ func GetBook(w http.ResponseWriter,r *http.Request){
 	collection := db.Client()
 	log.Print(id)
 	var result user.User
-	cur, err := collection.FindOne(context.TODO(),bson.D{{"id",id}}).Decode(&result)
-	log.Print(cur)
+	err := collection.FindOne(context.TODO(), bson.D{{Key: "id", Value: id}}).Decode(&result)
 	if err != nil {
 		log.Fatal(err)
 	}else{
